@@ -36,7 +36,7 @@ const createTables = async () => {
             picture TEXT NOT NULL,
             description TEXT NOT NULL,
             content TEXT NOT NULL,
-            created_at TIMESTAMP NOTNULL DEFAULT NOW(),
+            created_at TIMESTAMP NOT NULL DEFAULT NOW(),
             user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
         );
 
