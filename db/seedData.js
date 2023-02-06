@@ -1,4 +1,5 @@
 const client = require('./client');
+const { createUser } = require('./users');
 
 const dropTables = async () => {
     try {
@@ -22,12 +23,9 @@ const createTables = async () => {
         await client.query(`
         CREATE TABLE users (
             id SERIAL PRIMARY KEY,
-            name TEXT NOT NULL,
+            name TEXT,
             username TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL,
-            email TEXT NOT NULL,
-            bio TEXT NOT NULL,
-            picture TEXT NOT NULL
+            password TEXT NOT NULL
         );
 
         CREATE TABLE songs (
@@ -58,10 +56,27 @@ const createTables = async () => {
     }
 }
 
+const createInitialUsers = async () => {
+    try {
+        console.log('Starting to create user...');
+
+        const usersToCreate = [
+            { name: 'bailey', username: 'bailey', password: 'lavinerocks' },
+            { name: 'brad', username: 'brad', password: 'bruhbruh' }
+        ]
+
+        const users = await Promise.all(usersToCreate.map(createUser));
+
+    } catch (error) {
+        console.log(`Error creating users: ${error}`);
+    }
+}
+
 const rebuildDB = async () => {
     try {
         await dropTables();
         await createTables();
+        await createInitialUsers();
     } catch (error) {
         console.log(`Error during rebuild: ${error}`);
     }

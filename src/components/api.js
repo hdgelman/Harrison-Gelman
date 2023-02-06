@@ -22,16 +22,22 @@ export const loginUser = async (username, password) => {
 };
 
 export const registerUser = async (username, password) => {
-    const response = await fetch(`${BASE_URL}/users/register`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username,
-            password
-        })
-    });
-    const results = await response.json();
-    return results.token;
+
+    try {
+        const response = await fetch(`${BASE_URL}/users/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        });
+        const results = await response.json();
+        return results.token;
+
+    } catch (error) {
+        console.log(error);
+    }
 };

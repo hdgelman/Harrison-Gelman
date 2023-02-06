@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { useEffect, useState } from 'react';
-import { Login } from './components';
+import { Login, Register } from './components';
 
 const App = () => {
     const [token, setToken] = useState(localStorage.getItem('markymark'));
@@ -16,7 +16,8 @@ const App = () => {
     }, [])
 
     return (
-        <Login />
+        // <Login />
+        <Register />
     )
 }
 

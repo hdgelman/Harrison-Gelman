@@ -20,7 +20,7 @@ export const Login = ({ setToken }) => {
         setToken(result);
         setUsername('')
         setPassword('')
-        localStorage.setItem('markgeeharrison', `${result}`);
+        localStorage.setItem('markymark', `${result}`);
     };
 
     const submitLogout = (event) => {
